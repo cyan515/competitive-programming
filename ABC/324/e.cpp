@@ -11,7 +11,7 @@ const int MOD = 998244353;
 #define rep(i, n) reps(i, 0, n)
 #define all(a) (a).begin(), (a).end()
 
-vector<vector<int>> calcNext(const string &S) {
+vector<vector<int>> calc_next(const string &S) {
     int n = (int)S.size();
     vector<vector<int> > res(n + 1, vector<int>(26, n));
     for (int i = n - 1; i >= 0; --i) {
@@ -23,9 +23,9 @@ vector<vector<int>> calcNext(const string &S) {
 
 ll solve1(int n,string& t,vector<string>& ss) {
   
-  vector<vector<int>> l = calcNext(t);
+  vector<vector<int>> l = calc_next(t);
   reverse(all(t));
-  vector<vector<int>> r = calcNext(t);
+  vector<vector<int>> r = calc_next(t);
   rep(i,n) rep(j,26) r.at(i).at(j) = n-1-r.at(i).at(j);
   vector<int> ma(n);
   vector<int> mi(n);
