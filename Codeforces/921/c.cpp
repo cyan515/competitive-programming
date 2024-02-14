@@ -12,7 +12,7 @@ template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
-vector<vector<int> > calcNext(const string &S) {
+vector<vector<int> > calc_next(const string &S) {
     int n = (int)S.size();
     vector<vector<int> > res(n+1, vector<int>(26, n));
     for (int i = n-1; i >= 0; --i) {
@@ -28,7 +28,7 @@ int main() {
   while(T--) {
     int n,k,m;cin>>n>>k>>m;
     string s;cin>>s;
-    auto nxt = calcNext(s);
+    auto nxt = calc_next(s);
     string fl = "";
     vector ok(m,INF);
     auto dfs = [&](int idx,int cnt,auto dfs) -> string {

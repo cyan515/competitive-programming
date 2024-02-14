@@ -86,7 +86,8 @@
         "syncstream": "cpp",
         "thread": "cpp",
         "typeindex": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "powll": "c"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
