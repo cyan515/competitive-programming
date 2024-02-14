@@ -1,1 +1,1 @@
-# competitive-programming-library-cpp
+# My Competitive Programming Workspace
