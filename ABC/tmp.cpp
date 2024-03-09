@@ -1,53 +1,64 @@
-#include <bits/stdc++.h>
-#include <atcoder/all>
-using namespace std;
+#include<bits/stdc++.h>
+#include<atcoder/all>
 using namespace atcoder;
-using ll = long long;
-using mint = modint998244353;
-const int INF = 1001001001;
-const ll LINF = 3001001001001001001;
-const int MOD = 998244353;
-#define reps(i, a, n) for (ll i = (a); i < (ll)(n); ++i)
-#define rep(i, n) reps(i, 0, n)
-#define all(a) (a).begin(), (a).end()
-template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
-template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
-template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
+using mint=modint998244353;
+using namespace std;
+using ll=long long;
+using ull=unsigned long long;
+#define rep(i,a,b) for(ll i=(ll)(a);i<(ll)(b);i++)
+#define rrep(i,a,b) for(ll i=(ll)(a-1);i>=(ll)(b);i--)
+#define MOD 998244353
+//#define MOD 1000000007
+#define INF 1e18
+#define Pair pair<ll,ll>
+//#define PI numbers::pi
+//#define E numbers::e
+template <typename T> bool chmax(T& a,T b){if(a<b){a=b;return 1;}return 0;}
+template <typename T> bool chmin(T& a,T b){if(a>b){a=b;return 1;}return 0;}
+ll dx[4]={0,1,0,-1};
+ll dy[4]={1,0,-1,0};
+/*
+using S=ll;
+using F=ll;
+const S INF=8e18;
+S op(S a,S b){return min(a,b);}
+S e(){return INF;}
+S mapping(F f, S x){return (f+x)%2;}
+F composition(F f, F g){return (f+g)%2;}
+F id(){return 0;}
+*/
 
-// https://atcoder.jp/contests/abc159/tasks/abc159_e
-int main() {
-  int h,w;cin>>h>>w;
-  int k;cin>>k;
-  vector<string> s(h);cin>>s;
-  auto f = [&](int bit) -> int {
-    int ans = 0;
-    rep(i,h-1) if(bit & (1<<i)) ans++;
-    vector<int> cnt(ans+1,0);
-    int x = 0;
-    int ret = ans;
-    rep(j,w) {
-      vector<int> d(ans+1,0);
-      x = 0;
-      rep(i,h) {
-        if(s.at(i).at(j)=='1') d.at(x)++;
-        if(bit & (1<<i)) x++;
-      }
-      bool ok = true;
-      rep(i,ans+1) ok &= cnt.at(i)+d.at(i) <= k;
-      if(ok) {
-        rep(i,ans+1) cnt.at(i) += d.at(i);
-      } else {
-        ret++;
-        rep(i,ans+1) cnt.at(i) = d.at(i);
-      }
+int main(){
+    ll n; cin >> n;
+    vector<ll> a(n),b(n+2,0);
+    rep(i,0,n) cin >> a[i];
+    rep(i,0,n) b[i+1]=a[i];
+    map<ll,Pair> mp;
+    rep(i,1,n) mp[b[i]]={b[i-1],b[i+1]};
+    mp[0]={b[n],b[1]};
+    ll q; cin >> q;
+    while(q--){
+        ll t; cin >> t;
+        if(t==1){
+            ll x,y; cin >> x >> y;
+            ll z=mp.at(x).second;
+            mp[y]={x,z};
+            mp.at(z)={y,mp.at(z).second};
+            mp.at(x)={mp.at(x).first,y};
+        }
+        else{
+            ll x; cin >> x;
+            ll y=mp.at(x).first,z=mp.at(x).second;
+            mp.at(y)={mp.at(y).first,z};
+            mp.at(z)={y,mp.at(z).second};
+            mp.erase(x);
+        }
     }
-    return ret;
-  };
-  int ans = INF;
-  rep(bit,1<<(h-1)) {
-    ans = min(ans,f(bit));
-  }
-  cout << ans << endl;
-  
-  return 0;
+    ll now=0;
+    while(true){
+        if(mp[now].second==0) break;
+        cout << mp[now].second << ' ';
+        now=mp[now].second;
+    }
+    cout << endl;
 }

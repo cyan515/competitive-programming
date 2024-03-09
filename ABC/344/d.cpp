@@ -3,7 +3,6 @@
 using namespace std;
 using namespace atcoder;
 using ll = long long;
-using mint = modint998244353;
 const int INF = 1001001001;
 const ll LINF = 3001001001001001001;
 const int MOD = 998244353;
@@ -15,34 +14,36 @@ template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
-  int n,m,k,s,t,x;cin>>n>>m>>k>>s>>t>>x;s--;t--;x--;
-  vector g(n,vector<int>());
-  rep(_,m) {
-    int u,v;cin>>u>>v;u--;v--;
-    g.at(u).push_back(v);
-    g.at(v).push_back(u);
+  string t;cin>>t;
+  int n;cin>>n;
+  vector s(n,vector<string>());
+  rep(i,n) {
+    int a;cin>>a;
+    rep(_,a) {
+      string u;cin>>u;
+      s.at(i).push_back(u);
+    }
   }
-  vector<mint> odd(n,0);
-  vector<mint> evn(n,0);
-  evn.at(s) = 1;
-  rep(_,k) {
-    vector<mint> nodd(n,0);
-    vector<mint> nevn(n,0);
-    rep(i,n) {
-      for(auto ele : g.at(i)) {
-        if(ele==x) {
-          nodd.at(ele) += evn.at(i);
-          nevn.at(ele) += odd.at(i);
-        } else {
-          nodd.at(ele) += odd.at(i);
-          nevn.at(ele) += evn.at(i);
+  int m = t.size()+1;
+  vector<int> dp(m,INF);
+  dp.at(0) = 0;
+  rep(i,n) {
+    vector<int> ndp = dp;
+    for(string ele : s.at(i)) {
+      rep(j,m) {
+        if(j+ele.size()>=m) break;
+        if(dp.at(j)!=INF) {
+          if(t.substr(j,ele.size())==ele) {
+            chmin(ndp.at(j+ele.size()),dp.at(j)+1);
+          }
         }
       }
     }
-    swap(odd,nodd);
-    swap(evn,nevn);
+    swap(ndp,dp);
   }
-  cout << evn.at(t).val() << endl;
-  
+  int ans = dp.at(m-1);
+  if(ans==INF) ans = -1;
+  cout << ans << endl;
+
   return 0;
 }
