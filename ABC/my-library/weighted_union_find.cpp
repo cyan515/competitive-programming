@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming/viewer/weighted-union-find
 template <class Type>
 class weighted_union_find {
 public:
