@@ -9,7 +9,6 @@
                 "-std=gnu++17",
                 "-Wall",
                 "-Wextra",
-                "-DONLINE_JUDGE",
                 "-I/opt/boost/gcc/include",
                 "-L/opt/boost/gcc/lib",
                 "-I${workspaceFolder}/ac-library",
@@ -19,6 +18,7 @@
                 "-g",
                 "-fno-inline",
                 "-O0",
+                "-H",
             ],
             "group": {
                 "kind": "build",

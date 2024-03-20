@@ -15,34 +15,7 @@ template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
-  int n,m,k,s,t,x;cin>>n>>m>>k>>s>>t>>x;s--;t--;x--;
-  vector g(n,vector<int>());
-  rep(_,m) {
-    int u,v;cin>>u>>v;u--;v--;
-    g.at(u).push_back(v);
-    g.at(v).push_back(u);
-  }
-  vector<mint> odd(n,0);
-  vector<mint> evn(n,0);
-  evn.at(s) = 1;
-  rep(_,k) {
-    vector<mint> nodd(n,0);
-    vector<mint> nevn(n,0);
-    rep(i,n) {
-      for(auto ele : g.at(i)) {
-        if(ele==x) {
-          nodd.at(ele) += evn.at(i);
-          nevn.at(ele) += odd.at(i);
-        } else {
-          nodd.at(ele) += odd.at(i);
-          nevn.at(ele) += evn.at(i);
-        }
-      }
-    }
-    swap(odd,nodd);
-    swap(evn,nevn);
-  }
-  cout << evn.at(t).val() << endl;
-  
+  cout << "hw" << endl;
+
   return 0;
 }
