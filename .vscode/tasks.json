@@ -18,7 +18,6 @@
                 "-g",
                 "-fno-inline",
                 "-O0",
-                "-H",
             ],
             "group": {
                 "kind": "build",
