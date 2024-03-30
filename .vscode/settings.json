@@ -88,7 +88,9 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "powll": "c",
-        "modint": "cpp"
+        "modint": "cpp",
+        "segtree": "cpp",
+        "fenwicktree": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
