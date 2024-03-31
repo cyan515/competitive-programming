@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <atcoder/lazysegtree>
+#include <atcoder/fenwicktree>
 using namespace atcoder;
 using namespace std;
 using ll = long long;
@@ -12,72 +12,39 @@ const int MOD = 998244353;
 template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
-// T,hw,color,count
-using S = tuple<int,int,int,int>;
-using F = S;
-
-S op(S a,S b) {
-  return a;
-}
-
-S e() {
-  return tuple(0,0,0,0);
-}
-int h,w;
-S mapping(F f, S s) {
-  auto [a,b,c,d] = f;
-  if(a==0) return s;
-  auto [w,x,y,z] = s;
-  if(a==w) {
-    if(b==x) return tuple(w,x,y,0);
-    return s;
-  } else {
-    return tuple(w,x,y,max(z-1,0));
-  }
-}
-
-F comp(F f,F g) {
-  return mapping(f,g);
-}
-
-F id() {
-  return e();
-}
 
 int main() {
-  ll m;cin>>h>>w>>m;
-  vector<ll> hmemo(h,-1);
-  vector<ll> wmemo(w,-1);
-  lazy_segtree<S,op,e,F,mapping,comp,id> st(m+h);
-  rep(i,h) {
-    st.set(i,tuple(1,i,0,w));
+  ll n;cin>>n;
+  vector<ll> c(n);cin>>c;
+  vector<ll> x(n);cin>>x;
+  rep(i,n) c.at(i)--,x.at(i)--;
+  fenwick_tree<ll> ft(n);
+  ll inv = 0;
+  rep(i,n) {
+    ft.add(x.at(i),1);
+    inv += ft.sum(x.at(i)+1,n);
   }
-  reps(i,h,h+m) {
-    int t,a,x;cin>>t>>a>>x;a--;
-    if(t==1) {
-      st.set(i,tuple(t,a,x,w));
-      st.apply(hmemo.at(a)+1,i,tuple(t,a,x,w));
-      hmemo.at(a) = i;
-    } else {
-      st.set(i,tuple(t,a,x,h));
-      st.apply(wmemo.at(a)+1,i,tuple(t,a,x,h));
-      wmemo.at(a) = i;
+  vector a(n,vector<ll>());
+  rep(i,n) {
+    a.at(c.at(i)).push_back(x.at(i));
+  }
+  rep(i,n) {
+    vector<ll> arr = a.at(i);
+    sort(all(arr));
+    arr.erase(unique(all(arr)),arr.end());
+    vector<ll> res(a.at(i).size());
+    rep(j,a.at(i).size()) {
+      res.at(j) = lower_bound(all(arr),a.at(i).at(j)) - arr.begin();
     }
+    fenwick_tree<ll> t(arr.size());
+    ll cnt = 0;
+    rep(j,res.size()) {
+      t.add(res.at(j),1);
+      cnt += t.sum(res.at(j)+1,arr.size());
+    }
+    inv -= cnt;
   }
-  vector<ll>cnt(2*100001,0);
-  rep(i,m) {
-    auto [a,b,c,d] = st.get(i);
-    cnt.at(c) += d;
-  }
-  vector<pair<ll,ll>> ans;
-  rep(i,cnt.size()) {
-    if(cnt.at(i)==0) continue;
-    ans.push_back(pair(i,cnt.at(i)));
-  }
-  cout << ans.size() << endl;
-  for(auto [k,v] : ans) {
-    cout << k << " " << v << endl;
-  }
+  cout << inv << endl;
 
   return 0;
 }
