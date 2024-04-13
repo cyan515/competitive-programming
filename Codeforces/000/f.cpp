@@ -10,8 +10,14 @@ template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
+void solve() {
+  
+}
+
 int main() {
   cin.tie(0) -> sync_with_stdio(0);
+  int t;cin>>t;
+  while(t--) solve();
 
   exit(0);
 }
