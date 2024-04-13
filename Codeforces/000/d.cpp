@@ -20,5 +20,5 @@ int main() {
   int t;cin>>t;
   while(t--) solve();
 
-  exit(0);
+  return 0;
 }
