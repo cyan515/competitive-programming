@@ -12,7 +12,29 @@ template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
-  cin.tie(0) -> sync_with_stdio(0);
+  ll l,r;cin>>l>>r;
+  vector<pair<ll,ll>> ans;
+  ll a = l;
+  while(1) {
+    ll x = 1;
+    ll ma = -LINF;
+    while(1) {
+      if(a%x) {
+        break;
+      }
+      ll s = a/x;
+      if(x*(s+1)>r) {
+        break;
+      }
+      chmax(ma,x*(s+1));
+      x *= 2;
+    }
+    ans.push_back(pair(a,ma));
+    if(ma==r) break;
+    a = ma;
+  }
+  cout << ans.size() << endl;
+  rep(i,ans.size()) cout << ans.at(i).first << " " << ans.at(i).second << endl;
 
-  exit(0);
+  return 0;
 }

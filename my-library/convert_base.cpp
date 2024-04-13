@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 10進数表現の int を受け取って BASE 進数に変換して返す
-string convert_base(int _N, int BASE) {
+// 10進数表現の整数を受け取って BASE 進数に変換して返す
+string convert_base(long long _N, int BASE) {
   string RET = "";
   if (_N == 0LL) {
     RET = "0";

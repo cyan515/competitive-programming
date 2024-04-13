@@ -90,7 +90,8 @@
         "powll": "c",
         "modint": "cpp",
         "segtree": "cpp",
-        "fenwicktree": "cpp"
+        "fenwicktree": "cpp",
+        "math": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
