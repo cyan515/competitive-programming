@@ -12,7 +12,15 @@ const int MOD = 998244353;
 template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
-  
+  int n;cin>>n;
+  vector<string> a(n);cin>>a;
+  vector<string> b(n);cin>>b;
+  rep(i,n) rep(j,n) {
+    if(a.at(i).at(j)!=b.at(i).at(j)) {
+      cout << i+1 << " " << j+1 << endl;
+      return 0;
+    }
+  }
 
   return 0;
 }
