@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include <atcoder/all>
-using namespace std;
 using namespace atcoder;
+using namespace std;
 using ll = long long;
 const int INF = 1001001001;
 const ll LINF = 3001001001001001001;
