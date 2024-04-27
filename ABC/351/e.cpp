@@ -12,7 +12,21 @@ const int MOD = 998244353;
 template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
+  ll n;cin>>n;
+  vector<pair<ll,ll>> o,e;
+  rep(i,n) {
+    int a,b;cin>>a>>b;
+    if((a+b)%2) o.push_back(pair(a,b));
+    else e.push_back(pair(a,b));
+  }
+  sort(all(o));
+  sort(all(e));
+  ll ans = 0;
   
+  rep(i,o.size()) {
+
+  }
+  cout << ans << endl;
 
   return 0;
 }
