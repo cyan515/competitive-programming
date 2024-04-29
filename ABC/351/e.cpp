@@ -13,19 +13,25 @@ template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in
 
 int main() {
   ll n;cin>>n;
-  vector<pair<ll,ll>> o,e;
+  vector<ll> ox,oy,ex,ey;
   rep(i,n) {
     int a,b;cin>>a>>b;
-    if((a+b)%2) o.push_back(pair(a,b));
-    else e.push_back(pair(a,b));
+    if((a+b)%2) ox.push_back(a+b),oy.push_back(a-b);
+    else ex.push_back(a+b),ey.push_back(a-b);
   }
-  sort(all(o));
-  sort(all(e));
+  sort(all(ox));
+  sort(all(oy));
+  sort(all(ex));
+  sort(all(ey));
   ll ans = 0;
-  
-  rep(i,o.size()) {
-
-  }
+  auto f = [&](vector<ll>& vec) -> ll {
+    ll cnt = 0;
+    rep(i,vec.size()) {
+      cnt += (i-(vec.size()-1-i))*vec.at(i);
+    }
+    return cnt/2;
+  };
+  ans += f(ox) + f(oy) + f(ex) + f(ey);
   cout << ans << endl;
 
   return 0;
