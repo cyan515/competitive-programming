@@ -91,7 +91,8 @@
         "modint": "cpp",
         "segtree": "cpp",
         "fenwicktree": "cpp",
-        "lazysegtree": "cpp"
+        "lazysegtree": "cpp",
+        "scc": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
