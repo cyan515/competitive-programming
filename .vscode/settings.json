@@ -92,7 +92,8 @@
         "segtree": "cpp",
         "fenwicktree": "cpp",
         "lazysegtree": "cpp",
-        "scc": "cpp"
+        "scc": "cpp",
+        "dsu": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
