@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> longestNonDecreasingSubsequence(const vector<ll>& nums) {
+vector<int> longestNonDecreasingSubsequence(const vector<long long>& nums) {
     if (nums.empty()) return {};
 
     vector<int> tails;
