@@ -9,7 +9,7 @@ using ll = long long;
 */
 struct LCA {
     vector<vector<int>> parent;  // parent[k][u]:= u の 2^k 先の親
-    vector<int> dist;            // root からの距離
+    vector<int> dists;            // root からの距離
     
     // G.at(親) = 子どもの配列
     LCA(const vector<vector<int>> &G, int root = 0) { init(G, root); }
@@ -19,7 +19,7 @@ struct LCA {
         int K = 1;
         while ((1 << K) < V) K++;
         parent.assign(K, vector<int>(V, -1));
-        dist.assign(V, -1);
+        dists.assign(V, -1);
         dfs(G, root, -1, 0);
         for (int k = 0; k + 1 < K; k++) {
             for (int v = 0; v < V; v++) {
@@ -31,20 +31,21 @@ struct LCA {
             }
         }
     }
+private:
     // 根からの距離と1つ先の頂点を求める
     void dfs(const vector<vector<int>> &G, int v, int p, int d) {
         parent[0][v] = p;
-        dist[v] = d;
+        dists[v] = d;
         for (auto e : G[v]) {
             if (e != p) dfs(G, e, v, d + 1);
         }
     }
     int query(int u, int v) {
-        if (dist[u] < dist[v]) swap(u, v);  // u の方が深いとする
+        if (dists[u] < dists[v]) swap(u, v);  // u の方が深いとする
         int K = parent.size();
         // LCA までの距離を同じにする
         for (int k = 0; k < K; k++) {
-            if ((dist[u] - dist[v]) >> k & 1) {
+            if ((dists[u] - dists[v]) >> k & 1) {
                 u = parent[k][u];
             }
         }
