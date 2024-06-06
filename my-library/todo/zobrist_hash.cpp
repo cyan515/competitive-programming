@@ -2,7 +2,8 @@
 using namespace std;
 using ll = long long;
 
-void zobrist_hash(int n, vector<ll>& a) {
+// TODO: どういう形でライブラリ化したらいいんだ？
+void zobrist_hash(int n, const vector<ll>& a) {
 
   map<int, ll> table;
   mt19937_64 rng(time(0));
