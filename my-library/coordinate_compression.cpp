@@ -10,7 +10,14 @@ public:
     _sorted.erase(unique(_sorted.begin(),_sorted.end()),_sorted.end());
   }
   
-  long long compress(long long& val) const {
+  /**
+   * @fn
+   * 受け取った値を座標圧縮した場合いくつになるかを返す。
+   * 計算量 O(logN)
+   * 
+   * @param val 圧縮前の値
+   */
+  long long compress(const long long& val) const {
     long long ret = lower_bound(_sorted.begin(),_sorted.end(),val) - _sorted.begin();
     return ret;
   }
