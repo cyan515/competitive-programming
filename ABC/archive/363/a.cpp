@@ -1,44 +1,19 @@
-#include <iostream>
-#include <string>
-#include <cmath>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-long long powll(long long BASE, long long EXPONENT) {
-  long long RET = 1;
-  while (EXPONENT > 0) {
-    if (EXPONENT & 1) RET = RET * BASE;
-    BASE = BASE * BASE;
-    EXPONENT >>= 1;
-  }
-  return RET;
-}
-
-string generatePalindrome(long long prefix, bool isOdd) {
-    string result = to_string(prefix);
-    int startIndex = isOdd ? result.length() - 2 : result.length() - 1;
-    for (int i = startIndex; i >= 0; i--) {
-        result += result[i];
-    }
-    return result;
-}
-
-string findNthPalindrome(long long N) {
-    long long len = 1;
-    long long count = 9;
-    while (N > count) {
-        N -= count;
-        len++;
-        count = 9 * powll(10, (len - 1) / 2);
-    }
-
-    long long prefix = powll(10, (len - 1) / 2) + N - 1;
-    return generatePalindrome(prefix, len % 2);
-}
+using ll = long long;
+const int INF = 1001001001;
+const string Yes = "Yes";
+const string No = "No";
+#define reps(i, a, n) for (ll i = (a); i < (ll)(n); ++i)
+#define rep(i, n) reps(i, 0, n)
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
-    long long N;
-    cin >> N;N--;
-    cout << findNthPalindrome(N) << endl;
-    return 0;
+  int n;cin>>n;
+  n %= 100;
+  cout << 100 - n << endl;
+
+  return 0;
 }
