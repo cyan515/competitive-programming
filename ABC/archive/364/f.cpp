@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <atcoder/lazysegtree>
-using namespace atcoder;
 using namespace std;
 using ll = long long;
 const int INF = 1001001001;
@@ -15,42 +13,33 @@ const string No = "No";
 template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
-using S = ll;
-using F = ll;
-S op(S a,S b) {
-  return a+b;
-}
-S e() {
-  return 0;
-}
-S mapping(F f,S s) {
-  return min(f,s);
-}
-F comp(F f,F g) {
-  return min(f,g);
-}
-F id() {
-  return LINF;
-}
 
 int main() {
   int n,m;cin>>n>>m;
   vector<tuple<ll,int,int>> a(m);
   rep(i,m) {
-    ll l,r,c;cin>>l>>r>>c;l--;
+    ll l,r,c;cin>>l>>r>>c;
     a.at(i) = tuple(c,l,r);
   }
-  lazy_segtree<S,op,e,F,mapping,comp,id> st(n);
   sort(all(a));
+  set<int> st;
+  rep(i,n-1) st.insert(i+1);
   ll ans = 0;
-  bool ok = true;
   rep(i,m) {
     auto [c,l,r] = a.at(i);
-    st.apply(l,r,c);
+    auto it = st.lower_bound(l);
     ans += c;
+    vector<int> vec;
+    while(it!=st.end()&&*it<r) {
+      ans += c;
+      vec.push_back(*it);
+      it++;
+    }
+    for(auto ele : vec) {
+      st.erase(ele);
+    }
   }
-  ans += st.all_prod();
-  if(ok) cout << ans << endl;
+  if(st.empty()) cout << ans << endl;
   else cout << -1 << endl;
 
   return 0;
