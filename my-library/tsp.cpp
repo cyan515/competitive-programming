@@ -14,10 +14,10 @@ vector<vector<ll>> tsp(vector<vector<ll>>& dist) {
   rep(bit,1<<n) rep(from,n) {
     if(((bit&(1<<from))==0)&&(bit!=0)) continue;
     rep(to,n) {
-        if(((bit&(1<<to))==0)&&(dist.at(from).at(to)<LINF)) {
-            int v = (bit|(1<<to));
-            ret.at(v).at(to) = min(ret.at(v).at(to),ret.at(bit).at(from)+dist.at(from).at(to));
-        }
+      if(((bit&(1<<to))==0)&&(dist.at(from).at(to)<LINF)) {
+        int v = (bit|(1<<to));
+        ret.at(v).at(to) = min(ret.at(v).at(to),ret.at(bit).at(from)+dist.at(from).at(to));
+      }
     }
   }
   return ret;
