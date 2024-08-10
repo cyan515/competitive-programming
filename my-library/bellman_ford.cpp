@@ -6,7 +6,7 @@ using ll = long long;
 // 負閉路の影響を受ける頂点は -LINF
 // @see https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming/viewer/bellman-ford
 vector<ll> bellman_ford(const vector<vector<pair<ll,ll>>>& graph, const int& start) {
-  const ll LINF = 3001001001001001001;
+  constexpr ll LINF = 3001001001001001001;
   int n = graph.size();
   vector<ll> distances(graph.size(), LINF);
 	distances.at(start) = 0;

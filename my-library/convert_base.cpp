@@ -2,17 +2,18 @@
 using namespace std;
 
 // 10進数表現の整数を受け取って BASE 進数に変換して返す
-string convert_base(long long _N, int BASE) {
-  string RET = "";
-  if (_N == 0LL) {
-    RET = "0";
+string convert_base(const long long n, const int base) {
+  string ret = "";
+  long long cur = n;
+  if (cur == 0LL) {
+    ret = "0";
   } else {
-    while (_N > 0) {
-      char c = '0' + (_N % BASE);
-      RET += c;
-      _N /= BASE;
+    while (cur > 0) {
+      char c = '0' + (cur % base);
+      ret += c;
+      cur /= base;
     }
-    reverse(RET.begin(), RET.end());
+    reverse(ret.begin(), ret.end());
   }
-  return RET;
+  return ret;
 }

@@ -94,7 +94,8 @@
         "lazysegtree": "cpp",
         "scc": "cpp",
         "dsu": "cpp",
-        "maxflow": "cpp"
+        "maxflow": "cpp",
+        "math": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",

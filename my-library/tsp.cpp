@@ -7,7 +7,7 @@ using ll = long long;
 
 /// @brief 巡回セールスマン問題
 /// @param dist 隣接行列によるグラフ表現
-vector<vector<ll>> tsp(vector<vector<ll>>& dist) {
+vector<vector<ll>> tsp(const vector<vector<ll>>& dist) {
   const ll LINF = 3001001001001001001;
   int n = dist.size();
   vector<vector<ll>> ret((1<<n),vector<ll>(n,LINF));
