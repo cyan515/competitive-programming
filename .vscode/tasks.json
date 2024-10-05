@@ -9,6 +9,7 @@
                 "-std=gnu++23",
                 "-Wall",
                 "-Wextra",
+                "-Wshadow",
                 "-I/opt/boost/gcc/include",
                 "-L/opt/boost/gcc/lib",
                 "-I${workspaceFolder}/ac-library",
