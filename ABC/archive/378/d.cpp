@@ -18,7 +18,35 @@ template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in 
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  int h,w;cin>>h>>w;
+  int k;cin>>k;
+  vector<string> s(h);cin>>s;
+  auto in = [&](unsigned x,unsigned y) -> bool {
+    return x<h&&y<w;
+  };
+  vector seen(h,vector<bool>(w,false));
+  auto f = [&](auto f,int x,int y,int t) -> int {
+    if(t==k) return 1;
+    int ret = 0;
+    seen.at(x).at(y) = true;
+    for(auto [dx,dy] : dir) {
+      int nx = x+dx;
+      int ny = y+dy;
+      if(!in(nx,ny)) continue;
+      if(s.at(nx).at(ny)=='#') continue;
+      if(seen.at(nx).at(ny)) continue;
+      ret += f(f,nx,ny,t+1);
+    }
+    seen.at(x).at(y) = false;
+    return ret;
+  };
+  int ans = 0;
+  rep(si,h) rep(sj,w) {
+    if(s.at(si).at(sj)=='#') continue;
+    int cnt = f(f,si,sj,0);
+    ans += cnt;
+  }
+  cout << ans << endl;
 
   return 0;
 }

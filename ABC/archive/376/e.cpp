@@ -18,7 +18,36 @@ template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  int T;cin>>T;
+  while(T--) {
+    int n,k;cin>>n>>k;
+    vector<pair<ll,ll>> ab(n);
+    rep(i,n) cin>>ab.at(i).first;
+    rep(i,n) cin>>ab.at(i).second;
+    sort(all(ab));
+    vector<ll> a(n),b(n);
+    rep(i,n) {
+      a.at(i) = ab.at(i).first;
+      b.at(i) = ab.at(i).second;
+    }
+    multiset<ll> st;
+    ll sum = 0;
+    rep(i,k) {
+      st.insert(b.at(i));
+      sum+=b.at(i);
+    }
+    ll ans = a.at(k-1)*sum;
+    reps(i,k,n) {
+      sum += b.at(i);
+      auto it = st.end();
+      it--;
+      sum -= *it;
+      st.erase(it);
+      st.insert(b.at(i));
+      chmin(ans,a.at(i)*sum);
+    }
+    cout << ans << endl;
+  }
 
   return 0;
 }

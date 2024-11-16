@@ -14,11 +14,24 @@ const string No = "No";
 #define rall(a) (a).rbegin(), (a).rend()
 template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
-template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
+template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  string s;cin>>s;
+  int n = s.size();
+  map<char,ll> r;
+  map<char,ll> l;
+  rep(i,n) r[s.at(i)]++;
+  ll ans = 0;
+  rep(i,n) {
+    r[s.at(i)]--;
+    rep(c,26) {
+      ans += r['A'+c]*l['A'+c];
+    }
+    l[s.at(i)]++;
+  }
+  cout << ans << endl;
 
   return 0;
 }

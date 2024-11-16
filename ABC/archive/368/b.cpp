@@ -12,13 +12,21 @@ const string No = "No";
 #define rep(i, n) reps(i, 0, n)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
-template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
-template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
-vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  int n;cin>>n;
+  vector<int>a(n);cin>>a;
+  int ans = 0;
+  while(1) {
+    sort(all(a));
+    if(a.at(n-2)<=0) break;
+    ans++;
+    int m = a.size();
+    a.at(m-1)--;
+    a.at(m-2)--;
+  }
+  cout << ans << endl;
 
   return 0;
 }

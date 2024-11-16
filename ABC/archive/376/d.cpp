@@ -14,11 +14,36 @@ const string No = "No";
 #define rall(a) (a).rbegin(), (a).rend()
 template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
-template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
+template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  ll n,m;cin>>n>>m;
+  vector g(n,vector<ll>());
+  rep(i,m) {
+    int a,b;cin>>a>>b;a--;b--;
+    g.at(a).push_back(b);
+  }
+  queue<int> q;
+  vector<int> d(n,INF);
+  vector<bool> seen(n,false);
+  for(auto ele : g.at(0)) {
+    d.at(ele) = 1;
+    q.push(ele);
+    seen.at(ele) = true;
+  }
+  while(q.size()) {
+    int v = q.front();q.pop();
+    for(auto nv : g.at(v)) {
+      if(seen.at(nv)) continue;
+      seen.at(nv) = true;
+      d.at(nv) = d.at(v)+1;
+      q.push(nv);
+    }
+  }
+  int ans = d.at(0);
+  if(ans==INF) ans=-1;
+  cout << ans << endl;
 
   return 0;
 }

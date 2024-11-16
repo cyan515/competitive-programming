@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <atcoder/all>
+#include <atcoder/math>
 using namespace atcoder;
 using namespace std;
 using ll = long long;
@@ -12,13 +12,24 @@ const string No = "No";
 #define rep(i, n) reps(i, 0, n)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
-template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
-template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  ll m;cin>>m;
+  vector<int> ans;
+  while(m) {
+    int a = 0;
+    while(pow_mod(3,a+1,INF)<=m) a++;
+    ans.push_back(a);
+    m -= pow_mod(3,a,INF);
+  }
+  cout << ans.size() << endl;
+  rep(i,ans.size()) {
+    if(i) cout << " ";
+    cout << ans.at(i);
+  }
+  cout << endl;
 
   return 0;
 }

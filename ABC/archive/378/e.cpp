@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <atcoder/all>
+#include <atcoder/fenwicktree>
 using namespace atcoder;
 using namespace std;
 using ll = long long;
@@ -18,7 +18,25 @@ template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  
+  int n,m;cin>>n>>m;
+  vector<ll> a(n);cin>>a;
+  vector<ll> x(n+1,0);
+  fenwick_tree<ll> pref(n);
+  rep(i,n) {
+    x.at(i+1) += x.at(i)+a.at(i);
+    pref.add(i,a.at(i));
+    if(i!=0) pref.add(i,pref.sum(i-1,i));
+  }
+  rep(i,n+1) x.at(i) %= m;
+  ll ans = 0;
+  rep(l,n) {
+    reps(i,l+1,n+1) {
+      x.at(i) -= x.at(l);
+      if(x.at(i)<0) x.at(i) += m;
+    }
+    reps(i,l+1,n+1) ans += x.at(i);
+  }
+  cout << ans << endl;
 
   return 0;
 }
