@@ -6,19 +6,18 @@ using ll = long long;
 #define rep(i, n) reps(i, 0, n)
 
 /// @brief 巡回セールスマン問題
-/// @param dist 隣接行列によるグラフ表現
-vector<vector<ll>> tsp(const vector<vector<ll>>& dist) {
+/// @param graph graph[i][j] = i-j 間の距離
+/// @param dists dists[i][j] = 初期状態において訪問した集合が i で最後に訪問した頂点が j のときのコスト
+void tsp(const vector<vector<ll>>& graph, vector<vector<ll>>& dists) {
   const ll LINF = 3001001001001001001;
-  int n = dist.size();
-  vector<vector<ll>> ret((1<<n),vector<ll>(n,LINF));
+  int n = graph.size();
   rep(bit,1<<n) rep(from,n) {
     if(((bit&(1<<from))==0)&&(bit!=0)) continue;
     rep(to,n) {
-      if(((bit&(1<<to))==0)&&(dist.at(from).at(to)<LINF)) {
+      if(((bit&(1<<to))==0)&&(graph.at(from).at(to)<LINF)) {
         int v = (bit|(1<<to));
-        ret.at(v).at(to) = min(ret.at(v).at(to),ret.at(bit).at(from)+dist.at(from).at(to));
+        dists.at(v).at(to) = min(dists.at(v).at(to),dists.at(bit).at(from)+graph.at(from).at(to));
       }
     }
   }
-  return ret;
 }
