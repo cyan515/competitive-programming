@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/// @see https://ei1333.github.io/luzhiled/snippets/string/rolling-hash.html
 template< unsigned mod >
 struct rolling_hash {
   vector< unsigned > hashed, power;
@@ -27,6 +28,18 @@ struct rolling_hash {
     }
   }
  
+  rolling_hash(const vector<int> &a, unsigned base = 10007) {
+    int sz = (int) a.size();
+    hashed.assign(sz + 1, 0);
+    power.assign(sz + 1, 0);
+    power[0] = 1;
+    for(int i = 0; i < sz; i++) {
+      power[i + 1] = mul(power[i], base);
+      hashed[i + 1] = mul(hashed[i], base) + a[i];
+      if(hashed[i + 1] >= mod) hashed[i + 1] -= mod;
+    }
+  }
+
   // 半開区間
   unsigned get(int l, int r) const {
     unsigned ret = hashed[r] + mod - mul(hashed[l], power[r - l]);
@@ -53,9 +66,15 @@ struct rolling_hash {
 };
 
 struct multi_rolling_hash {
+
   multi_rolling_hash(const string &s, unsigned base1 = 10007, unsigned base2 = 9973) {
     rh1 = rolling_hash<1000000007>(s, base1);
     rh2 = rolling_hash<1000000009>(s, base2);
+  }
+
+  multi_rolling_hash(const vector<int> &a, unsigned base1 = 10007, unsigned base2 = 9973) {
+    rh1 = rolling_hash<1000000007>(a, base1);
+    rh2 = rolling_hash<1000000009>(a, base2);
   }
 
   // 半開区間

@@ -95,7 +95,9 @@
         "scc": "cpp",
         "dsu": "cpp",
         "maxflow": "cpp",
-        "math": "cpp"
+        "math": "cpp",
+        "sum_cnt_multiset": "cpp",
+        "assign_lazy_segtree": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
