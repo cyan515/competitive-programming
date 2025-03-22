@@ -68,19 +68,32 @@ struct rolling_hash {
   }
 };
 
-using RH = rolling_hash< 1000000007 >;
-using RH2 = rolling_hash< 1000000009 >;
+struct multi_rolling_hash {
+  multi_rolling_hash(const string &s, unsigned base1 = 10007, unsigned base2 = 9973) {
+    rh1 = rolling_hash<1000000007>(s, base1);
+    rh2 = rolling_hash<1000000009>(s, base2);
+  }
+
+  // 半開区間
+  pair<unsigned,unsigned> get(int l, int r) const {
+    return pair(rh1.get(l, r), rh2.get(l, r));
+  }
+
+private:
+  rolling_hash<1000000007> rh1;
+  rolling_hash<1000000009> rh2;
+};
 
 int main() {
   string s;cin>>s;
   int n = s.size();
   string t = s;
   reverse(all(t));
-  RH a(s),b(t);
-  RH2 x(s,9973),y(t,9973);
+  
+  multi_rolling_hash a(s),b(t);
   int ma = -INF;
   rep(i,n+1) {
-    if(a.get(n-i,n)==b.get(0,i)&&x.get(n-i,n)==y.get(0,i)) chmax(ma,(int)i);
+    if(a.get(n-i,n)==b.get(0,i)) chmax(ma,(int)i);
   }
   if(ma==-INF) {
     cout << s << t << endl;

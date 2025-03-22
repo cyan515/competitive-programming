@@ -51,3 +51,19 @@ struct rolling_hash {
     return (low);
   }
 };
+
+struct multi_rolling_hash {
+  multi_rolling_hash(const string &s, unsigned base1 = 10007, unsigned base2 = 9973) {
+    rh1 = rolling_hash<1000000007>(s, base1);
+    rh2 = rolling_hash<1000000009>(s, base2);
+  }
+
+  // 半開区間
+  pair<unsigned,unsigned> get(int l, int r) const {
+    return pair(rh1.get(l, r), rh2.get(l, r));
+  }
+
+private:
+  rolling_hash<1000000007> rh1;
+  rolling_hash<1000000009> rh2;
+};
