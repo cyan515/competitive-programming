@@ -3,9 +3,12 @@ using namespace std;
 const ll LINF = 3001001001001001001;
 using ll = long long;
 
-// ダイクストラ法 dijkstra method
-// graph の pair は <辺の重み, 頂点番号> です。
-vector<ll> dijkstra(const vector<vector<pair<ll,ll>>>& graph, const int& source_node=0) {
+/**
+ * @fn
+ * ダイクストラ法
+ * @param 隣接リスト表現によるグラフ。pair は (weight, to)
+ */
+vector<ll> dijkstra(const vector<vector<pair<ll,int>>>& graph, const int& source_node = 0) {
   
   priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<>> q;
   q.emplace(0,source_node);

@@ -2,14 +2,18 @@
 using namespace std;
 using ll = long long;
 
-// ベルマンフォード法
-// 負閉路の影響を受ける頂点は -LINF
-// @see https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming/viewer/bellman-ford
-vector<ll> bellman_ford(const vector<vector<pair<ll,ll>>>& graph, const int& start) {
+/**
+ * @fn
+ * ベルマンフォード法
+ * 負閉路の影響を受ける頂点は -LINF
+ * @param graph 隣接リスト表現によるグラフ。pair は (weight, to)x
+ * @see https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming/viewer/bellman-ford
+ */
+vector<ll> bellman_ford(const vector<vector<pair<ll,int>>>& graph, const int& source_node = 0) {
   constexpr ll LINF = 3001001001001001001;
   int n = graph.size();
   vector<ll> distances(graph.size(), LINF);
-	distances.at(start) = 0;
+	distances.at(source_node) = 0;
 
   for(int i=0;i<n;i++) {
 		bool changed = false;

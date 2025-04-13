@@ -2,11 +2,12 @@
 using namespace std;
 
 /**
+ * @fn
  * lowest_common_ancestor(graph, root): 木 graph について、root を根として Lowest Common Ancestor を求める構造体<br/>
  * query(u,v): u と v の lowest_common_ancestor を求める。計算量 O(logn)
  * 前処理: O(nlogn)時間, O(nlogn)空間
  * @see https://algo-logic.info/lca/#
-*/
+ */
 struct lowest_common_ancestor {
 
   // graph.at(親) = 子どもの配列

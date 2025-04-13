@@ -1,8 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 拡張ユークリッドの互除法
-// 不定方程式の解が x y に代入される。
+/**
+ * @fn
+ * ax + by = gcd(a, b) を満たす (x, y) が格納される
+ * @brief 拡張ユークリッドの互除法
+ * @return gcd(a, b)
+ */
 long long ext_gcd(const long long& a, const long long& b, long long &x, long long &y) {
   if (b == 0) {
     x = 1;

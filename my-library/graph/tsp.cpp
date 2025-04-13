@@ -5,9 +5,11 @@ using ll = long long;
 #define reps(i, a, n) for (ll i = (a); i < (ll)(n); ++i)
 #define rep(i, n) reps(i, 0, n)
 
-/// @brief 巡回セールスマン問題
-/// @param graph graph[i][j] = i-j 間の距離
-/// @param dists dists[i][j] = 初期状態において訪問した集合が i で最後に訪問した頂点が j のときのコスト
+/**
+ * @brief 巡回セールスマン問題
+ * @param graph 隣接行列表現によるグラフ。
+ * @param dists dists[i][j] = 初期状態において訪問した集合が i で最後に訪問した頂点が j のときのコスト
+ */
 void tsp(const vector<vector<ll>>& graph, vector<vector<ll>>& dists) {
   const ll LINF = 3001001001001001001;
   int n = graph.size();

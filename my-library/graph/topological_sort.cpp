@@ -5,11 +5,13 @@ using ll = long long;
 #define reps(i, a, n) for (ll i = (a); i < (ll)(n); ++i)
 #define rep(i, n) reps(i, 0, n)
 
-/// @brief トポロジカルソート
-/// @param graph グラフ
-/// @return トポロジカルソートの結果で辞書順最小のもの。グラフが閉路を含む場合は閉路の前まで
-/// @note 1.3 トポロジカルソートの結果で辞書順最小のもの
-/// @see https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming/viewer/topological-sort
+/**
+ * @brief トポロジカルソート
+ * @param graph 隣接リスト表現によるグラフ
+ * @return トポロジカルソートの結果で辞書順最小のもの。グラフが閉路を含む場合は閉路の前まで
+ * @note 1.3 トポロジカルソートの結果で辞書順最小のもの
+ * @see https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming/viewer/topological-sort
+ */
 vector<int> topological_sort(const vector<vector<int>>& graph) {
   vector<int> in(graph.size());
 

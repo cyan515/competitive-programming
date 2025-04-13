@@ -1,14 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// UnionFind, able to rewind to the previous state by undo()
-// Written for Educational Codeforces 62 F, although not verified yet.
-// @see https://atcoder.jp/contests/abc328/submissions/47458831
+/**
+ * @fn
+ * UnionFind, able to rewind to the previous state by undo()
+ * Written for Educational Codeforces 62 F, although not verified yet.
+ * @see https://atcoder.jp/contests/abc328/submissions/47458831
+ */
 struct rollbackable_union_find {
   using pint = pair<int, int>;
   vector<int> par, cou;
   stack<pair<int, pint>> history;
-  rollbackable_union_find(int N) : par(N), cou(N, 1) { iota(par.begin(), par.end(), 0); }
+  rollbackable_union_find(int n) : par(n), cou(n, 1) { iota(par.begin(), par.end(), 0); }
   int leader(int x) const { return (par[x] == x) ? x : leader(par[x]); }
   bool merge(int x, int y) {
     x = leader(x), y = leader(y);
