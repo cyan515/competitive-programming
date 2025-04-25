@@ -4,7 +4,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "/usr/bin/g++",
+            "command": "/usr/local/bin/g++-14",
             "args": [
                 "-std=gnu++23",
                 "-Wall",
@@ -14,16 +14,16 @@
                 "-L/opt/boost/gcc/lib",
                 "-I${workspaceFolder}/ac-library",
                 "-o",
-                "'${workspaceFolder}/problem.exe'",
-                "'${file}'",
+                "${workspaceFolder}/problem.exe",
+                "${file}",
                 "-g",
                 "-fno-inline",
-                "-O0",
+                "-O0"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-        },
+            }
+        }
     ]
 }
