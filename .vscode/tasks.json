@@ -10,15 +10,14 @@
                 "-Wall",
                 "-Wextra",
                 "-Wshadow",
-                "-I/opt/boost/gcc/include",
-                "-L/opt/boost/gcc/lib",
+                "-L/usr/local/lib",
                 "-I${workspaceFolder}/ac-library",
                 "-o",
                 "${workspaceFolder}/problem.exe",
                 "${file}",
                 "-g",
                 "-fno-inline",
-                "-O0"
+                "-O0",
             ],
             "group": {
                 "kind": "build",
