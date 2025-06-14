@@ -14,8 +14,13 @@ template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return
 template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
+#pragma GCC target("avx")
+#pragma GCC optimize("O3")
+#pragma GCC optimize("unroll-loops")
 
 int main() {
+  ios::sync_with_stdio(false);
+  std::cin.tie(nullptr);
   int T;cin>>T;
   while(T--) {
     ll h,w;cin>>h>>w;
@@ -25,12 +30,23 @@ int main() {
     rep(i,h) rep(j,w) {
       pref.at(i+1).at(j+1) = pref.at(i).at(j+1) + pref.at(i+1).at(j) - pref.at(i).at(j) + (s.at(i).at(j)=='#'?1:-1);
     }
-    if(h<w) {
+    unordered_map<int,int> mp;
+    if(h<=w) {
       rep(i,h+1) reps(j,i+1,h+1) {
-        
+        rep(k,w+1) {
+          ll x = pref.at(j).at(k)-pref.at(i).at(k);
+          ans += mp[x]++;
+        }
+        mp.clear();
       }
     } else {
-      
+      rep(i,w+1) reps(j,i+1,w+1) {
+        rep(k,h+1) {
+          ll x = pref.at(k).at(j)-pref.at(k).at(i);
+          ans += mp[x]++;
+        }
+        mp.clear();
+      }
     }
     cout << ans << endl;
   }

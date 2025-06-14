@@ -115,7 +115,9 @@
         "format": "cpp",
         "generator": "cpp",
         "stacktrace": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "spanstream": "cpp",
+        "stdfloat": "cpp"
     },
     "cmake.configureOnOpen": false,
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
