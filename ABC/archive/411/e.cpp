@@ -26,6 +26,28 @@ S e() {
   return 0;
 }
 
+double reconstruct(atcoder::modint998244353& m) {
+  pair<long long, long long> v = {m.mod(), 0};
+  pair<long long, long long> w = {m.val(), 1};
+
+  while (w.first * w.first * 2 > m.mod()) {
+    long long q = v.first / w.first;
+    pair<long long, long long> z = {
+      v.first - q * w.first,
+      v.second - q * w.second
+    };
+    v = w;
+    w = z;
+  }
+
+  if (w.second < 0) {
+    w.first *= -1;
+    w.second *= -1;
+  }
+
+  return (double) w.first / (double) w.second;
+}
+
 // 座標圧縮
 class coordinate_compression {
 public:
@@ -91,19 +113,17 @@ int main() {
     rep(j,6) {
       int comp = cc.compress(a.at(i).at(j));
       seg.apply(comp,bef,mint(6-j)*inv6);
-      // seg.apply(comp,bef,double(6-j)/6.0);
-      seg.set(comp,seg.get(comp)+seg.prod(0,comp)/6.0);
+      seg.set(comp,seg.get(comp)+seg.prod(0,comp)*inv6);
       bef = comp;
     }
     seg.apply(0,bef,0);
-    // rep(ii,m) cout << ii << " " << seg.get(ii) << endl;
   }
   mint ans = 0;
   rep(i,m) {
     ans += cc.rev(i)*seg.get(i);
   }
   cout << ans.val() << endl;
-  // rep(ii,m) cout << ii << " " << seg.get(ii) << endl;
+  cout << reconstruct(ans) << endl;
 
   return 0;
 }
