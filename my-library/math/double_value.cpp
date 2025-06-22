@@ -4,7 +4,7 @@
 using namespace std;
 
 // @see https://github.com/catupper/RationalModConverter/blob/main/convert.js
-double reconstruct(atcoder::modint998244353& m) {
+double double_value(atcoder::modint998244353& m) {
   pair<long long, long long> v = {m.mod(), 0};
   pair<long long, long long> w = {m.val(), 1};
 
