@@ -18,9 +18,9 @@ const int P_MAX = 100000;
 const int BLOCK_LEN = 100;
 const int BLOCK_SIZE = P_MAX / BLOCK_LEN + 10;
 
-struct Point {
+struct point {
   int x,y;
-  Point(int x=0,int y=0) : x(x),y(y){}
+  point(int x=0,int y=0) : x(x),y(y){}
 };
 
 void answer(set<pair<int,int>>& ans) {
@@ -44,7 +44,7 @@ int sum(vector<vector<int>>& pref,int up,int down,int right,int left) {
   return pref.at(right).at(up)-pref.at(right).at(down)-pref.at(left).at(up)+pref.at(left).at(down);
 }
 
-void solve(int n,vector<Point>& ok,vector<Point>& ng) {
+void solve(int n,vector<point>& ok,vector<point>& ng) {
   
   vector blocks(BLOCK_SIZE,vector<int>(BLOCK_SIZE));
   rep(i,n) {
@@ -141,14 +141,14 @@ void solve(int n,vector<Point>& ok,vector<Point>& ng) {
 
 int main() {
   int n;cin>>n;
-  vector<Point> ok(n),ng(n);
+  vector<point> ok(n),ng(n);
   rep(i,n) {
     int x,y;cin>>x>>y;
-    ok.at(i) = Point(x,y);
+    ok.at(i) = point(x,y);
   }
   rep(i,n) {
     int x,y;cin>>x>>y;
-    ng.at(i) = Point(x,y);
+    ng.at(i) = point(x,y);
   }
   solve(n,ok,ng);
   
