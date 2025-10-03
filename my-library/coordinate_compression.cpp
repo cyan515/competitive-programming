@@ -2,9 +2,10 @@
 using namespace std;
 
 // 座標圧縮
+template <typename T>
 class coordinate_compression {
 public:
-  coordinate_compression(const vector<long long>& data) {
+  coordinate_compression(const vector<T>& data) {
     _sorted = data;
     sort(_sorted.begin(),_sorted.end());
     _sorted.erase(unique(_sorted.begin(),_sorted.end()),_sorted.end());
@@ -17,8 +18,8 @@ public:
    * 
    * @param val 圧縮前の値
    */
-  int compress(const long long& val) const {
-    long long ret = lower_bound(_sorted.begin(),_sorted.end(),val) - _sorted.begin();
+  int compress(const T& val) const {
+    T ret = lower_bound(_sorted.begin(),_sorted.end(),val) - _sorted.begin();
     return ret;
   }
   
@@ -42,5 +43,5 @@ public:
   }
   
 private:
-  vector<long long> _sorted;
+  vector<T> _sorted;
 };
