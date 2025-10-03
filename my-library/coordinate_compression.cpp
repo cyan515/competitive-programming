@@ -30,7 +30,7 @@ public:
    * 
    * @param val 圧縮後の値
    */
-  long long decompress(const int& val) const {
+  const T& decompress(const int& val) const {
     return this->_sorted.at(val);
   }
   
