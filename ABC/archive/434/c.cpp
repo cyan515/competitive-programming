@@ -13,31 +13,32 @@ const string No = "No";
 template <typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
-vector<pair<char, int>> run_length(const string& str) {
-  int n = (int)str.size();
-  vector<pair<char, int>> ret;
-  for (int l = 0; l < n;) {
-    int r = l + 1;
-    for (; r < n && str[l] == str[r]; r++) {};
-    ret.push_back({str[l], r - l});
-    l = r;
-  }
-  return ret;
-}
-
 int main() {
-  string s;cin>>s;
-  auto rl = run_length(s);
-  ll n = rl.size();
-  ll ans = 0;
-  rep(i,n-1) {
-    auto [lc,ls] = rl.at(i);
-    auto [rc,rs] = rl.at(i+1);
-    if(lc+1==rc) {
-      ans += min(ls,rs);
+  int T;cin>>T;
+  while(T--) {
+    ll n,h;cin>>n>>h;
+    vector<ll> t(n),l(n),u(n);
+    rep(i,n) cin>>t.at(i)>>l.at(i)>>u.at(i);
+    ll cl = h;
+    ll cu = h;
+    ll ct = 0;
+    bool ok = true;
+    rep(i,n) {
+      ll dt = t.at(i)-ct;
+      ll nl = cl - dt;
+      ll nu = cu + dt;
+      if(nu < l.at(i) || nl > u.at(i)) {
+        ok = false;
+        break;
+      }
+      cu = min(nu,u.at(i));
+      cl = max(nl,l.at(i));
+      if(cu<=0) cu = 0;
+      if(cl<=0) cl = 0;
+      ct = t.at(i);
     }
+    cout << (ok?Yes:No) << endl;
   }
-  cout << ans << endl;
 
   return 0;
 }

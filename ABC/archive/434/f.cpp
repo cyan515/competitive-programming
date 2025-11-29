@@ -16,27 +16,19 @@ template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in 
 vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
 
 int main() {
-  ll n,m;cin>>n>>m;
-  vector<ll> a(n);cin>>a;
-  vector cnt(11,map<ll,ll>());
-  {
-    ll base = 1;
-    rep(idx,11) {
-      rep(i,n) {
-        cnt.at(idx)[a.at(i)%m*base%m]++;
-      }
-      base *= 10;
-      base %= m;
-    }
+  int T;cin>>T;
+  while(T--) {
+    int n;cin>>n;
+    vector<string> s(n);cin>>s;
+    sort(all(s),[](string& a,string& b) -> bool {
+      return a+b<b+a;
+    });
+    next_permutation(all(s),[](string& a,string& b) -> bool {
+      return a+b<b+a;
+    });
+    rep(i,n) cout<<s.at(i);
+    cout<<endl;
   }
-  ll ans = 0;
-  rep(i,n) {
-    ll len = to_string(a.at(i)).size();
-    ll x = a.at(i) % m;
-    if(x) ans += cnt.at(len)[m-x];
-    else ans += cnt.at(len)[0];
-  }
-  cout << ans << endl;
 
   return 0;
 }

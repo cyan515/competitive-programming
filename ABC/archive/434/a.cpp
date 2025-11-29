@@ -11,15 +11,14 @@ const string No = "No";
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
-  ll x,y,z;cin>>x>>y>>z;
-  rep(i,10000000) {
-    if(x==y*z) {
-      cout << Yes << endl;
+  int w,b;cin>>w>>b;
+  w*=1000;
+  rep(i,1000000) {
+    if(w<i*b) {
+      cout << i << endl;
       return 0;
     }
-    x++;y++;
   }
-  cout << No << endl;
 
   return 0;
 }
