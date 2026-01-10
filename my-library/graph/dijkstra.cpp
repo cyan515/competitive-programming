@@ -8,12 +8,12 @@ using ll = long long;
  * ダイクストラ法
  * @param 隣接リスト表現によるグラフ。pair は (weight, to)
  */
-vector<ll> dijkstra(const vector<vector<pair<ll,int>>>& graph, const int& source_node = 0) {
+vector<ll> dijkstra(const vector<vector<pair<ll,int>>>& graph, const vector<int>& source_nodes = {0}) {
   
   priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<>> q;
-  q.emplace(0,source_node);
+  for(auto ele : source_nodes) q.push(pair(0,ele));
   vector<ll> dists(graph.size(),LINF);
-  dists.at(source_node) = 0;
+  for(auto ele : source_nodes) dists.at(ele) = 0;
   while(q.size()) {
     auto [d,v] = q.top();q.pop();
     if(dists.at(v) < d) continue;
