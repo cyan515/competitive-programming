@@ -1,0 +1,138 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const int INF = 1001001001;
+const ll LINF = 3001001001001001001;
+const int MOD = 998244353;
+const string Yes = "Yes";
+const string No = "No";
+#define reps(i, a, n) for (ll i = (a); i < (ll)(n); ++i)
+#define rep(i, n) reps(i, 0, n)
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+template<typename T> bool chmin(T& a, T b){if(a > b){a = b; return true;} return false;}
+template<typename T> bool chmax(T& a, T b){if(a < b){a = b; return true;} return false;}
+template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
+vector<pair<int,int>> dir = {{0,1},{0,-1},{1,0},{-1,0},};
+
+/**
+ * @fn
+ * lowest_common_ancestor(graph, root): 木 graph について、root を根として Lowest Common Ancestor を求める構造体<br/>
+ * query(u,v): u と v の lowest_common_ancestor を求める。計算量 O(logn)
+ * 前処理: O(nlogn)時間, O(nlogn)空間
+ * @see https://algo-logic.info/lca/#
+ */
+struct lowest_common_ancestor {
+
+  // graph.at(親) = 子どもの配列
+  lowest_common_ancestor(const vector<vector<int>>& graph, const int& root = 0) {
+    init(graph, root);
+  }
+
+  int query(int u, int v) {
+    if (depth.at(u) < depth.at(v)) swap(u, v);  // u の方が深いとする
+    int K = parent.size();
+    // lowest_common_ancestor までの距離を同じにする
+    for (int k = 0; k < K; k++) {
+      if ((depth[u] - depth[v]) >> k & 1) {
+        u = parent[k][u];
+      }
+    }
+    // 二分探索で lowest_common_ancestor を求める
+    if (u == v) return u;
+    for (int k = K - 1; k >= 0; k--) {
+      if (parent[k][u] != parent[k][v]) {
+        u = parent[k][u];
+        v = parent[k][v];
+      }
+    }
+    return parent[0][u];
+  }
+
+  int dist(int u,int v) {
+    int lca = query(u,v);
+    int ret = depth.at(u) + depth.at(v) - 2*depth.at(lca);
+    return ret;
+  }
+
+private:
+  vector<vector<int>> parent; // parent[k][u]:= u の 2^k 先の親
+  vector<int> depth; // root からの距離
+
+  // 初期化
+  void init(const vector<vector<int>>& graph, const int& root = 0) {
+    int vertices_count = graph.size();
+    int K = 1;
+    while ((1 << K) < vertices_count) K++;
+    parent.assign(K, vector<int>(vertices_count, -1));
+    depth.assign(vertices_count, -1);
+    dfs(graph, root, -1, 0);
+    for (int k = 0; k + 1 < K; k++) {
+      for (int v = 0; v < vertices_count; v++) {
+        if (parent[k][v] < 0) {
+          parent[k + 1][v] = -1;
+        } else {
+          parent[k + 1][v] = parent[k][parent[k][v]];
+        }
+      }
+    }
+  }
+
+  // 根からの距離と1つ先の頂点を求める
+  void dfs(const vector<vector<int>> &graph, int v, int p, int d) {
+    parent[0][v] = p;
+    depth[v] = d;
+    for (auto e : graph[v]) {
+      if (e != p) dfs(graph, e, v, d + 1);
+    }
+  }
+
+};
+
+int main() {
+  int n;cin>>n;
+  vector g(n,vector<int>());
+  rep(i,n-1) {
+    int u,v;cin>>u>>v;
+    g.at(u).push_back(v);
+    g.at(v).push_back(u);
+  }
+  auto lca = lowest_common_ancestor(g);
+  vector<ll> subt(n,0);
+  {
+    vector<bool> cone(n,false);
+    auto dfs = [&](auto self,int v,int p) -> ll {
+      ll cnt = 1;
+      bool co = false;
+      if(v==1) co=true;
+      for(auto nv : g.at(v)) {
+        if(nv==p) continue;
+        cnt += self(self,nv,v);
+        if(nv==1) co = true;
+        co |= cone.at(nv);
+      }
+      subt.at(v) = cnt;
+      cone.at(v) = co;
+      return cnt;
+    };
+    dfs(dfs,0,-1);
+  }
+  ll ans = 0;
+  int x = 0;
+  int y = 0;
+  reps(i,1,n) {
+    if(lca.dist(i,x)+lca.dist(x,y)==lca.dist(i,y)) {
+      x = i;
+    } else if(lca.dist(i,y)+lca.dist(x,y)==lca.dist(i,x)) {
+      y = i;
+    } else if(lca.dist(i,x)+lca.dist(i,y)==lca.dist(x,y)) {
+      
+    } else {
+      break;
+    }
+    ll z = lca.query(x,y);
+  }
+  cout << ans << endl;
+
+  return 0;
+}
