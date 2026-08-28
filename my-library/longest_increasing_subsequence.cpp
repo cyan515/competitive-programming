@@ -1,15 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> longestNonDecreasingSubsequence(const vector<long long>& nums) {
+vector<long long> longestNonDecreasingSubsequence(const vector<long long>& nums) {
     if (nums.empty()) return {};
 
-    vector<int> tails;
+    vector<long long> tails;
     vector<int> previousIndex(nums.size(), -1);
     vector<int> index(nums.size(), -1);
     int length = 0;
+    const int n = nums.size();
 
-    for (int i = 0; i < nums.size(); ++i) {
+    for (int i = 0; i < n; ++i) {
         auto it = upper_bound(tails.begin(), tails.end(), nums[i]);
         int pos = distance(tails.begin(), it);
 
@@ -29,7 +30,7 @@ vector<int> longestNonDecreasingSubsequence(const vector<long long>& nums) {
         }
     }
 
-    vector<int> lnds(length);
+    vector<long long> lnds(length);
     int k = index[length - 1];
     for (int j = length - 1; j >= 0; --j) {
         lnds[j] = nums[k];

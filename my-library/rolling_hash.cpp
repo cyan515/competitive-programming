@@ -7,10 +7,14 @@ struct rolling_hash {
   vector< unsigned > hashed, power;
  
   inline unsigned mul(unsigned a, unsigned b) const {
+#if defined(__i386__) || defined(__x86_64__)
     unsigned long long x = (unsigned long long) a * b;
     unsigned xh = (unsigned) (x >> 32), xl = (unsigned) x, d, m;
     asm("divl %4; \n\t" : "=a" (d), "=d" (m) : "d" (xh), "a" (xl), "r" (mod));
     return m;
+#else
+    return static_cast<unsigned>(static_cast<__uint128_t>(a) * b % mod);
+#endif
   }
 
   rolling_hash(){

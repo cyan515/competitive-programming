@@ -10,6 +10,11 @@ using namespace std;
  * @return 木の直径の長さ
  */
 int tree_diameter(const vector<vector<int>> &graph, int *u = nullptr, int *v = nullptr) {
+  if (graph.empty()) {
+    if (u) *u = -1;
+    if (v) *v = -1;
+    return 0;
+  }
   const int INF = (1 << 30) - 1;
   int n = graph.size();
   auto bfs = [&](int s) -> vector<int> {
@@ -18,16 +23,16 @@ int tree_diameter(const vector<vector<int>> &graph, int *u = nullptr, int *v = n
     queue<int> q;
     q.push(s);
     while(q.size()) {
-      int v = q.front();q.pop();
-      for(auto nv : graph.at(v)) {
+      int current = q.front();q.pop();
+      for(auto nv : graph.at(current)) {
         if(dists.at(nv)!=INF) continue;
-        dists.at(nv) = dists.at(v) + 1;
+        dists.at(nv) = dists.at(current) + 1;
         q.push(nv);
       }
     }
     return dists;
   };
-  int x;
+  int x = 0;
   {
     auto dists = bfs(0);
     int ma = -INF;
@@ -38,7 +43,7 @@ int tree_diameter(const vector<vector<int>> &graph, int *u = nullptr, int *v = n
       }
     }
   }
-  int y;
+  int y = 0;
   int ret = -INF;
   {
     auto dists = bfs(x);

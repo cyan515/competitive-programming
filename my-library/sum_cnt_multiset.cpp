@@ -34,11 +34,12 @@ public:
   /// @param x 追加する値
   /// @param y 追加する個数
   void insert(ll x, int y) {
+    const int index = compress.at(x);
     all_sum += x * y;
     all_cnt += y;
     
-    _insert(sum_data, compress[x], x * y);
-    _insert(cnt_data, compress[x], y);
+    _insert(sum_data, index, x * y);
+    _insert(cnt_data, index, y);
   }
 
   /// @brief 集合から値を削除する O(logN)

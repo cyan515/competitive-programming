@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-const ll LINF = 3001001001001001001;
 using ll = long long;
+const ll LINF = 3001001001001001001;
 
 /**
  * @fn
