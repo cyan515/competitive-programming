@@ -1,3 +1,4 @@
+// for my libraries, refer to https://github.com/cyan515/competitive-programming
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
