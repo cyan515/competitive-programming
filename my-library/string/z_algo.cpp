@@ -3,6 +3,7 @@ using namespace std;
 
 vector<int> z_algo(const string& s) {
   int n = s.size();
+  if (n == 0) return {};
   vector<int> z(n, 0);
   z.at(0) = n;
   int l = 0, r = 0;

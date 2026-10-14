@@ -9,7 +9,9 @@ using namespace std;
  * @brief 平方根
  */
 long long sqr(const long long& x) {
-  long long r = sqrt(x)-2;
-  while((r+1)*(r+1)<=x)r++;
+  assert(x >= 0);
+  long long r = sqrtl(static_cast<long double>(x));
+  while (static_cast<__int128>(r + 1) * (r + 1) <= x) r++;
+  while (static_cast<__int128>(r) * r > x) r--;
   return r;
 }

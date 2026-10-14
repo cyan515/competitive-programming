@@ -8,8 +8,10 @@ using namespace std;
  * @brief エラトステネスのふるい
  */
 vector<bool> eratosthenes(const int& n) {
+  if (n < 0) return {};
   vector<bool> is_prime(n+1, true);
-  is_prime[0] = is_prime[1] = false;
+  is_prime[0] = false;
+  if (n >= 1) is_prime[1] = false;
   for (int p = 2; p <= n; ++p) {
     if (!is_prime[p]) continue;
     for (int q = p * 2; q <= n; q += p) {

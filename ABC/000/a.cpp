@@ -1,3 +1,4 @@
+// for my libraries, refer to https://github.com/cyan515/competitive-programming
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -11,6 +12,8 @@ const string No = "No";
 template<typename T> istream &operator>>(istream &is, vector<T> &v) {for (T &in : v)is >> in;return is;}
 
 int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
   
 
   return 0;
